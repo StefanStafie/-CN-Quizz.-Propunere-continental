@@ -20,6 +20,7 @@ BAZA DE DATE:
 *   -contine un singur tabel cu 3 campuri: "id" cheie primara, "intrebare", "raspuns";
 *   -retine intrebarile si raspusurile corespunzatoare;
 *   -interogarea se face in functie de id.
+
 SERVER:
 *   -se conecteaza la baza de date;
 *   -permite conectarea clientilor;
@@ -27,7 +28,8 @@ SERVER:
 *   -thread-ul principal realizeaza sincronizarea dintre clienti;
 *   -permite inregistrarea clientilor prin transmiterea numelor acestora;
 *   -transmite intrebarile din baza de date catre client si primeste raspunsurile acestora. In cazul in care raspunsul este   *   corect se mareste scorul acelui client;
-*   -dupa ce se parcurg toate intrebarile din baza de date, se trimite numele castigatorului (castigatorilor, in cazul in care *   este egalitate) catre toti clientii.
+*   -dupa ce se parcurg toate intrebarile din baza de date, se trimite numele castigatorului (castigatorilor, in cazul in care este egalitate) catre toti clientii.
+
 CLIENT:
 *   -se conecteaza la server;
 *   -isi transmite numele;
