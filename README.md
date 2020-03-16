@@ -48,6 +48,6 @@ Use cases:
 
 PS: pentru a rula server in linux: ./server  
 
-    pentru a rula client in linux: ./client 127.0.0.1 5555
+   pentru a rula client in linux: ./client 127.0.0.1 5555
     
-    pentru compilare: gcc -o server server.c -lpthread -lsqlite3
+   pentru compilare: gcc -o server server.c -lpthread -lsqlite3
