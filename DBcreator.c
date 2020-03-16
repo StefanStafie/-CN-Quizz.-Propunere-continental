@@ -1,11 +1,5 @@
-/* servTCPCSel.c - Exemplu de server TCP concurent 
-   
-   Asteapta un "nume" de la clienti multipli si intoarce clientilor sirul
-   "Hello nume" corespunzator; multiplexarea intrarilor se realizeaza cu select().
-   
-   Cod sursa preluat din [Retele de Calculatoare,S.Buraga & G.Ciobanu, 2003] si modificat de 
-   Lenuta Alboaie  <adria@infoiasi.ro> (c)2009
-   
+/**
+ * 
 */
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -25,8 +19,11 @@
 #include <sqlite3.h>
 #include <stdio.h>    
 
-sqlite3 *db;//baza de date folosita
-char *err_msg = 0; // eroare returnata de alte apeluri
+sqlite3 *db; //database identifier
+char *err_msg = 0; //error identifier
+/**
+ * function for displaying the database after the changes
+*/
 int callback(void *NotUsed, int argc, char **argv, char **azColName);
 
 /* programul */
@@ -36,7 +33,7 @@ int main ()
   if (rc != SQLITE_OK) {
       fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
       sqlite3_close(db);
-      return 1;
+      return -1;
   }
   char *sql = "DROP TABLE IF EXISTS quiz;"
               "CREATE TABLE quiz ( id int(3), intrebare varchar(1000), raspuns char(1) );"
@@ -55,20 +52,25 @@ int main ()
               "INSERT INTO quiz VALUES(13, '13. Ce animal este Capitanul din animatia 101 Dalmatieni?    \nA) Om    B) Pisica    C) Melc    D) Dalmatian\n', 'B');" ;
   
   rc = sqlite3_exec(db, sql,0,0,&err_msg);
+
   if(rc!= SQLITE_OK){
     fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
       sqlite3_close(db);
-      return 1;
+      return -1;
   }
+
   rc = sqlite3_exec(db, "SELECT * FROM quiz",callback,0,&err_msg);
-  if(rc!= SQLITE_OK)
-    printf("not ok2");
-    
+  if(rc!= SQLITE_OK){
+    sqlite3_close(db);
+    return -1; 
+  }
+
   sqlite3_close(db);
   return 0;
 }
-int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 
+
+int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     for (int i = 0; i < argc; i++) {
        printf("%s ", argv[i]);
     }
