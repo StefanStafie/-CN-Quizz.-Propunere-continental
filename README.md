@@ -47,5 +47,7 @@ Use cases:
   #clientul se conecteaza. Jocul incepe si apoi clientul transmite numele --> Clientul ramane in void ca pedeapsa. Serverul nu ia in considerare acel client
 
 PS: pentru a rula server in linux: ./server  
+
     pentru a rula client in linux: ./client 127.0.0.1 5555
+    
     pentru compilare: gcc -o server server.c -lpthread -lsqlite3
